@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnHub - E-Learning</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #000000;
+    color: #ffffff;
+}
+
+header {
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 1px solid #333;
+}
+
+header h2, footer h2 {
+    color: #ff718a;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+}
+
+nav a:hover {
+    color: #ff718a;
+}
+
+.hero {
+    text-align: center;
+    padding: 65px 20px;
+    background: #000000;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 5vw, 45px);
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: #ff718a;
+}
+
+.hero p {
+    color: #cccccc;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 13px 25px;
+    border-radius: 25px;
+    background: #ff718a;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 45px;
+    padding: 25px 15px;
+    text-align: center;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.stats h2 {
+    color: #ffad32;
+    margin-bottom: 7px;
+}
+
+.stats p {
+    color: #bbbbbb;
+}
+
+.section-title {
+    text-align: center;
+    margin: 35px 10px 22px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 15px 25px;
+}
+
+.categories button {
+    padding: 11px 18px;
+    border-radius: 25px;
+    border: 1px solid #ff718a;
+    background: #111111;
+    color: white;
+    cursor: pointer;
+}
+
+.categories button:hover,
+.categories button.active {
+    background: #ff718a;
+    color: black;
+}
+
+.courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+    padding: 15px 7% 45px;
+}
+
+.card {
+    background: #101010;
+    border: 1px solid #333333;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ff718a;
+}
+
+.thumbnail {
+    height: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 52px;
+}
+
+.web {
+    background: linear-gradient(135deg, #124c49, #168b7b);
+}
+
+.ai {
+    background: linear-gradient(135deg, #48205e, #b56cff);
+}
+
+.design {
+    background: linear-gradient(135deg, #a64d13, #ffad32);
+}
+
+.marketing {
+    background: linear-gradient(135deg, #8b294c, #ff718a);
+}
+
+.play {
+    position: absolute;
+    background: white;
+    color: #111111;
+    border-radius: 50%;
+    padding: 12px 16px;
+    font-size: 18px;
+}
+
+.details {
+    padding: 18px;
+}
+
+.tag {
+    color: #ff718a;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.details h3 {
+    margin: 12px 0;
+}
+
+.description {
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.instructor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 17px 0;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    background: #281b2c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.instructor small {
+    color: #aaaaaa;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.objectives {
+    background: #181018;
+    border-left: 3px solid #b56cff;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #dddddd;
+}
+
+.objectives h4 {
+    color: #ffad32;
+    margin-bottom: 5px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 17px;
+    font-size: 13px;
+}
+
+.progress-info b {
+    color: #ff718a;
+}
+
+.progress {
+    height: 8px;
+    background: #333333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 9px 0 16px;
+}
+
+.bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #ff718a, #ffad32);
+    transition: width 0.5s;
+}
+
+.enroll {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #ff5578, #ffad70);
+    color: #000000;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.enroll:hover {
+    background: #b56cff;
+    color: white;
+}
+
+.enroll:disabled {
+    background: #319b77;
+    color: white;
+    cursor: default;
+}
+
+footer {
+    border-top: 1px solid #333;
+    text-align: center;
+    padding: 28px 15px;
+    color: #bbbbbb;
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 7px;
+    }
+
+    .stats {
+        gap: 25px;
+    }
+
+    .courses {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>✦ LearnHub</h2>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#courses">Courses</a>
+        <a href="#footer">Contact</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>Learn Today, <span>Lead Tomorrow!</span></h1>
+    <p>
+        Discover new skills, learn from expert instructors,
+        <br>and turn your dreams into reality.
+    </p>
+    <a href="#courses" class="main-btn">Explore Courses →</a>
+</section>
+
+<section class="stats">
+    <div><h2>500+</h2><p>Courses</p></div>
+    <div><h2>10K+</h2><p>Learners</p></div>
+    <div><h2>200+</h2><p>Instructors</p></div>
+    <div><h2>50K+</h2><p>Enrollments</p></div>
+</section>
+
+<section id="categories">
+    <h2 class="section-title">✦ Explore Categories</h2>
+    <div class="categories">
+        <button class="active" onclick="filterCourses('all',this)">All Courses</button>
+        <button onclick="filterCourses('web',this)">Web Development</button>
+        <button onclick="filterCourses('ai',this)">Artificial Intelligence</button>
+        <button onclick="filterCourses('design',this)">Design</button>
+        <button onclick="filterCourses('marketing',this)">Marketing</button>
+    </div>
+</section>
+
+<section id="courses">
+<h2 class="section-title">🔥 Featured Courses</h2>
+
+<div class="courses">
+
+    <div class="card" data-category="web">
+        <div class="thumbnail web">💻 <span class="play">▶</span></div>
+        <div class="details">
+            <span class="tag">WEB DEVELOPMENT</span>
+            <h3>Complete Web Development</h3>
+            <p class="description">Learn HTML, CSS and JavaScript to create beautiful, responsive websites.</p>
+            <div class="instructor">
+                <div class="avatar">👨‍🏫</div>
+                <div>John Smith<br><small>Web Developer</small></div>
+            </div>
+            <div class="objectives">
+                <h4>Learning Objectives</h4>
+                ✓ Create web pages<br>
+                ✓ Style websites with CSS<br>
+                ✓ Learn JavaScript basics
+            </div>
+            <div class="progress-info"><span>Course Progress</span><b id="p1">0%</b></div>
+            <div class="progress"><div class="bar" id="b1"></div></div>
+            <button class="enroll" onclick="enroll(1,this)">Enroll Now →</button>
+        </div>
+    </div>
+
+    <div class="card" data-category="ai">
+        <div class="thumbnail ai">🤖 <span class="play">▶</span></div>
+        <div class="details">
+            <span class="tag">ARTIFICIAL INTELLIGENCE</span>
+            <h3>AI and Machine Learning</h3>
+            <p class="description">Explore AI concepts, machine learning algorithms, and real-world applications.</p>
+            <div class="instructor">
+                <div class="avatar">👩‍🏫</div>
+                <div>Sarah Johnson<br><small>AI Engineer</small></div>
+            </div>
+            <div class="objectives">
+                <h4>Learning Objectives</h4>
+                ✓ Understand AI concepts<br>
+                ✓ Learn machine learning basics<br>
+                ✓ Explore AI applications
+            </div>
+            <div class="progress-info"><span>Course Progress</span><b id="p2">0%</b></div>
+            <div class="progress"><div class="bar" id="b2"></div></div>
+            <button class="enroll" onclick="enroll(2,this)">Enroll Now →</button>
+        </div>
+    </div>
+
+    <div class="card" data-category="design">
+        <div class="thumbnail design">🎨 <span class="play">▶</span></div>
+        <div class="details">
+            <span class="tag">CREATIVE DESIGN</span>
+            <h3>UI/UX Design for Beginners</h3>
+            <p class="description">Design attractive interfaces and create better digital experiences.</p>
+            <div class="instructor">
+                <div class="avatar">👨‍💻</div>
+                <div>David Lee<br><small>UI/UX Designer</small></div>
+            </div>
+            <div class="objectives">
+                <h4>Learning Objectives</h4>
+                ✓ Understand UI and UX<br>
+                ✓ Create wireframes<br>
+                ✓ Design user-friendly apps
+            </div>
+            <div class="progress-info"><span>Course Progress</span><b id="p3">0%</b></div>
+            <div class="progress"><div class="bar" id="b3"></div></div>
+            <button class="enroll" onclick="enroll(3,this)">Enroll Now →</button>
+        </div>
+    </div>
+
+    <div class="card" data-category="marketing">
+        <div class="thumbnail marketing">📈 <span class="play">▶</span></div>
+        <div class="details">
+            <span class="tag">DIGITAL MARKETING</span>
+            <h3>Digital Marketing Mastery</h3>
+            <p class="description">Learn SEO, social media, and online marketing strategies.</p>
+            <div class="instructor">
+                <div class="avatar">👩‍💼</div>
+                <div>Emily Davis<br><small>Marketing Expert</small></div>
+            </div>
+            <div class="objectives">
+                <h4>Learning Objectives</h4>
+                ✓ Understand SEO<br>
+                ✓ Learn social media marketing<br>
+                ✓ Create marketing strategies
+            </div>
+            <div class="progress-info"><span>Course Progress</span><b id="p4">0%</b></div>
+            <div class="progress"><div class="bar" id="b4"></div></div>
+            <button class="enroll" onclick="enroll(4,this)">Enroll Now →</button>
+        </div>
+    </div>
+
+</div>
+</section>
+
+<footer id="footer">
+    <h2>✦ LearnHub</h2>
+    <p>Learn new skills. Build your future.</p>
+    <p>© 2026 LearnHub | All Rights Reserved</p>
+</footer>
+
+<script>
+function filterCourses(category, button) {
+    document.querySelectorAll(".categories button").forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".card").forEach(function(card) {
+        card.style.display =
+            category === "all" || card.dataset.category === category
+            ? "block" : "none";
+    });
+}
+
+function enroll(id, button) {
+    document.getElementById("p" + id).textContent = "10%";
+    document.getElementById("b" + id).style.width = "10%";
+    button.textContent = "Enrolled ✓";
+    button.disabled = true;
+    alert("You have enrolled successfully!");
+}
+</script>
+
+</body>
+</html>
